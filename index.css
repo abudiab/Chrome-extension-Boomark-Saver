@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 10px;
@@ -19,6 +23,11 @@ button {
     padding: 10px 20px;
     border: 1px solid #5f9341;
     font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(0.8);
 }
 
 #delete-btn {

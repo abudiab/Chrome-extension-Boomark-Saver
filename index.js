@@ -1,21 +1,22 @@
-let myLeads = []
+let myBookmarks = []
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
 const deleteBtn = document.getElementById("delete-btn")
-const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
+const leadsFromLocalStorage = JSON.parse( localStorage.getItem("myBookmarks") )
 const tabBtn = document.getElementById("tab-btn")
 
 if (leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage
-    render(myLeads)
+    myBookmarks = leadsFromLocalStorage
+    render(myBookmarks)
 }
 
 tabBtn.addEventListener("click", function(){    
+    //The below works only in the context of a browser extension.
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        myLeads.push(tabs[0].url)
-        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-        render(myLeads)
+        myBookmarks.push(tabs[0].url)
+        localStorage.setItem("myBookmarks", JSON.stringify(myBookmarks) )
+        render(myBookmarks)
     })
 })
 
@@ -35,13 +36,13 @@ function render(leads) {
 
 deleteBtn.addEventListener("dblclick", function() {
     localStorage.clear()
-    myLeads = []
-    render(myLeads)
+    myBookmarks = []
+    render(myBookmarks)
 })
 
 inputBtn.addEventListener("click", function() {
-    myLeads.push(inputEl.value)
+    myBookmarks.push(inputEl.value)
     inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-    render(myLeads)
+    localStorage.setItem("myBookmarks", JSON.stringify(myBookmarks) )
+    render(myBookmarks)
 })
